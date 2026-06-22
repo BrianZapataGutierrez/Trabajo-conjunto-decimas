@@ -99,3 +99,48 @@ def mostrar_reservas(reservas):
         return
     for r in reservas:
         print(r)
+def mostrar_estadisticas(reservas):
+    if not reservas:
+        print("Sin reservas ")
+        return
+    print(f"Total: {len(reservas)}")
+    print(f"Ingresos: ${sum(r['total']for r in reservas)}")
+    m = max(reservas, key=lambda x:x['total'])
+    print(f"Mayor: {m['nombre']} ${m['total']}")
+    print(f"Promedio: ${sum(r['total'] for r in reservas)/ len(reservas):.2f}")
+
+def salir_sistema():
+    print("Gracias por usar el sistema, Saliendo....")
+    return True
+
+def menu():
+    while True:
+        limpiar_pantalla()
+        print("1. Registrar reserva")
+        print("2. Buscar reserva")
+        print("3. Actualizar reserva")
+        print("4. Eliminar reserva")
+        print("5. Mostrar reservas")
+        print("6. Mostrar estadísticas")
+        print("7. Salir")
+
+        opcion = input("Ingrese una Opcion: ")
+
+        if opcion == "1":
+            registrar_reserva(reservas)
+        elif opcion == "2":
+            buscar_reserva_menu(reservas)
+        elif opcion == "3":
+            actualizar_reserva(reservas)
+        elif opcion == "4":
+            eliminar_reserva(reservas)
+        elif opcion == "5":
+            mostrar_reservas(reservas)
+        elif opcion == "6":
+            mostrar_estadisticas(reservas)
+        elif opcion == "7":
+            if salir_sistema():
+                break
+        else: 
+            print("Invalido")
+menu()        
